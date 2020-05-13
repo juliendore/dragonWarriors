@@ -8,7 +8,7 @@ public class Warrior {
     }
 
     public void sayHello() {
-        System.out.println("Hey guys my name is " + this.name + ". I'm a warrior.");
+        System.out.println("Je suis un redoutable " + this.getClass().getSimpleName() + ", mon nom est " + this.getName() + ".");
     }
 
     public String getName() {

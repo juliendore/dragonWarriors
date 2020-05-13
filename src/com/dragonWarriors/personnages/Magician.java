@@ -8,6 +8,14 @@ public class Magician {
     }
 
     public void sayHello() {
-        System.out.println("Hey guys my name is " + this.name + ". I'm a magician.");
+        System.out.println("Je suis un puissant " + this.getClass().getSimpleName() + ", mon nom est " + this.getName() + ".");
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
