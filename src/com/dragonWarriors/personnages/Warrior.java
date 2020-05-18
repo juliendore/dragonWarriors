@@ -1,6 +1,6 @@
 package com.dragonWarriors.personnages;
 
-public class Warrior extends Personnage {
+public class Warrior extends Character {
 
     private String name;
     private int hp;
@@ -31,4 +31,5 @@ public class Warrior extends Personnage {
     public void setAttack(int attack) {
         this.attack = attack;
     }
+
 }

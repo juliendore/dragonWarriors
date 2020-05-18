@@ -1,8 +1,7 @@
 package com.dragonWarriors;
 
 import com.dragonWarriors.personnages.*;
-
-import java.lang.reflect.Method;
+import com.dragonWarriors.personnages.Character;
 import java.util.Scanner;
 
 public class Menu {
@@ -15,7 +14,7 @@ public class Menu {
         String userinput = input.nextLine();
         switch (userinput) {
             case "start":
-                this.select();
+                this.newCharacter();
                 break;
             case "quit":
                 this.caseQuit();
@@ -26,35 +25,36 @@ public class Menu {
         }
     }
 
-    public void select() {
-        Scanner input = new Scanner(System.in);
+    public void newCharacter() {
         System.out.println("Choose your character");
         System.out.println("warrior");
         System.out.println("magician");
+        Scanner input = new Scanner(System.in);
         String userinput = input.nextLine();
         System.out.println("What is your name ?");
+        Scanner sc = new Scanner(System.in);
+        String name = sc.nextLine();
         switch (userinput) {
             case "warrior":
-                Warrior warrior = newWarrior();
+                Warrior warrior = new Warrior(name);
                 warrior.sayHello();
                 next(warrior);
-                break;
+            break;
             case "magician":
-                Magician magician = this.newMagician();
+                Magician magician = new Magician(name);
                 magician.sayHello();
-//                next(magician);
+                next(magician);
                 break;
             case "quit":
                 this.caseQuit();
                 break;
             default:
                 System.out.println("Incorrect entry.");
-                this.select();
+                this.newCharacter();
         }
     }
 
-
-    public void next(Warrior player) {
+    public void next(Character player) {
         System.out.println("What do you want to do now ?");
         System.out.println("infos");
         System.out.println("rename");
@@ -137,16 +137,5 @@ public class Menu {
         return pos;
     }
 
-    public Warrior newWarrior() {
-        Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
-        return new Warrior(name);
-    }
-
-    public Magician newMagician() {
-        Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
-        Magician magician = new Magician(name);
-        return magician;
-    }
 }
+
