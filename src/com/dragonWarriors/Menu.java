@@ -2,6 +2,7 @@ package com.dragonWarriors;
 
 import com.dragonWarriors.personnages.*;
 
+import java.lang.reflect.Method;
 import java.util.Scanner;
 
 public class Menu {
@@ -17,112 +18,94 @@ public class Menu {
                 this.select();
                 break;
             case "quit":
-                System.out.println("A bientôt !");
-                System.exit(0);
+                this.caseQuit();
                 break;
             default:
-                System.out.println("Saisie incorrecte.");
+                System.out.println(".");
                 this.welcome();
         }
     }
 
     public void select() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Choisis ton personnage");
+        System.out.println("Choose your character");
         System.out.println("warrior");
         System.out.println("magician");
         String userinput = input.nextLine();
-        System.out.println("Quel est ton nom ?");
+        System.out.println("What is your name ?");
         switch (userinput) {
             case "warrior":
-                Warrior warrior = this.newWarrior();
+                Warrior warrior = newWarrior();
                 warrior.sayHello();
-                System.out.println("Que veux tu faire à présent ?");
-                System.out.println("infos");
-                System.out.println("rename");
-                System.out.println("play");
-                input = new Scanner(System.in);
-                userinput = input.nextLine();
-                switch (userinput) {
-                    case "infos":
-                        System.out.println("Nom du personnage :" + warrior.getName());
-                        System.out.println("Type du personnage :" + warrior.getClass().getSimpleName());
-                        break;
-                    case "rename":
-                        System.out.println("Quel nom voulez vous donner ?");
-                        input = new Scanner(System.in);
-                        userinput = input.nextLine();
-                        warrior.setName(userinput);
-                        warrior.sayHello();
-                        break;
-                    case "play":
-                        int pos = 1;
-                        this.play(pos);
-                    case "quit":
-                        System.out.println("A bientôt !");
-                        System.exit(0);
-                        break;
-                    default:
-                        System.out.println("Saisie incorrecte.");
-                        this.select();
-                }
+                next(warrior);
                 break;
             case "magician":
                 Magician magician = this.newMagician();
                 magician.sayHello();
-                System.out.println("Que veux tu faire à présent ?");
-                System.out.println("infos");
-                System.out.println("rename");
-                System.out.println("play");
-                input = new Scanner(System.in);
-                userinput = input.nextLine();
-                switch (userinput) {
-                    case "infos":
-                        System.out.println("Nom du personnage :" + magician.getName());
-                        System.out.println("Type du personnage :" + magician.getClass().getSimpleName());
-                        break;
-                    case "rename":
-                        System.out.println("Quel nom voulez vous donner ?");
-                        input = new Scanner(System.in);
-                        userinput = input.nextLine();
-                        magician.setName(userinput);
-                        magician.sayHello();
-                        break;
-                    case "play":
-                        int pos = 1;
-                        this.play(pos);
-                    case "quit":
-                        System.out.println("A bientôt !");
-                        System.exit(0);
-                        break;
-                    default:
-                        System.out.println("Saisie incorrecte.");
-                        this.select();
-                }
+//                next(magician);
                 break;
             case "quit":
-                System.out.println("A bientôt !");
-                System.exit(0);
+                this.caseQuit();
                 break;
             default:
-                System.out.println("Saisie incorrecte.");
+                System.out.println("Incorrect entry.");
                 this.select();
         }
     }
 
+
+    public void next(Warrior player) {
+        System.out.println("What do you want to do now ?");
+        System.out.println("infos");
+        System.out.println("rename");
+        System.out.println("play");
+        Scanner input = new Scanner(System.in);
+        String userinput = input.nextLine();
+        switch (userinput) {
+            case "infos":
+                System.out.println("Name : " + player.getName());
+                System.out.println("Type : " + player.getClass().getSimpleName());
+                System.out.println("Hp : " + player.getHp());
+                System.out.println("Attack : " + player.getAttack());
+                this.next(player);
+                break;
+            case "rename":
+                System.out.println("What is your new name ?");
+                input = new Scanner(System.in);
+                userinput = input.nextLine();
+                player.setName(userinput);
+                this.next(player);
+                break;
+            case "play":
+                int pos = 1;
+                this.play(pos);
+            case "quit":
+                this.caseQuit();
+                break;
+            default:
+                System.out.println("Incorrect entry.");
+                this.next(player);
+        }
+    }
+
+    public void caseQuit() {
+        System.out.println("See you soon !");
+        System.exit(0);
+    }
+
     public int play(int pos) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Position actuelle : " + pos + "/64");
-        System.out.println("'roll' pour lancer le dé.");
+        System.out.println("Position : " + pos + "/64");
+        System.out.println("'roll' to roll the dice.");
         String userinput = input.nextLine();
         switch (userinput) {
             case "roll":
                 int dice1 = 0;
                 dice1 = 1 + (int) (Math.random() * 6);
                 pos += dice1;
-                System.out.println("Résultat du lancer de dé : " + dice1);
+                System.out.println("Dice roll : " + dice1);
                 if (pos >= 64) {
-                    System.out.println("Bravo tu as fini que veux tu faire ?");
+                    System.out.println("Congratulation you've finished ! What do you want to do now ?");
                     System.out.println("restart");
                     System.out.println("quit");
                     input = new Scanner(System.in);
@@ -133,11 +116,10 @@ public class Menu {
                             this.play(pos);
                             break;
                         case "quit":
-                            System.out.println("A bientôt !");
-                            System.exit(0);
+                            this.caseQuit();
                             break;
                         default:
-                            System.out.println("Saisie incorrecte.");
+                            System.out.println("Incorrect entry.");
                             pos = 64;
                     }
 
@@ -145,12 +127,10 @@ public class Menu {
                 this.play(pos);
                 break;
             case "quit":
-                System.out.println("A bientôt !");
-                System.exit(0);
-
+                this.caseQuit();
                 break;
             default:
-                System.out.println("Saisie incorrecte.");
+                System.out.println("Incorrect entry.");
                 this.play(pos);
         }
 
@@ -160,8 +140,7 @@ public class Menu {
     public Warrior newWarrior() {
         Scanner sc = new Scanner(System.in);
         String name = sc.nextLine();
-        Warrior warrior = new Warrior(name);
-        return warrior;
+        return new Warrior(name);
     }
 
     public Magician newMagician() {
