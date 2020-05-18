@@ -26,4 +26,12 @@ public abstract class Character {
         return this.attack;
     }
 
+    @Override
+    public String toString() {
+        return "Character{" +
+                "name='" + name + '\'' +
+                ", hp=" + hp +
+                ", attack=" + attack +
+                '}';
+    }
 }

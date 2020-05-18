@@ -2,6 +2,9 @@ package com.dragonWarriors;
 
 import com.dragonWarriors.personnages.*;
 import com.dragonWarriors.personnages.Character;
+
+import com.dragonWarriors.Game.*;
+
 import java.util.Scanner;
 
 public class Menu {
@@ -20,7 +23,7 @@ public class Menu {
                 this.caseQuit();
                 break;
             default:
-                System.out.println(".");
+                System.out.println("Incorrect entry.");
                 this.welcome();
         }
     }
@@ -67,6 +70,7 @@ public class Menu {
                 System.out.println("Type : " + player.getClass().getSimpleName());
                 System.out.println("Hp : " + player.getHp());
                 System.out.println("Attack : " + player.getAttack());
+//                System.out.println("recap : " + player.toString());
                 this.next(player);
                 break;
             case "rename":
@@ -78,7 +82,7 @@ public class Menu {
                 break;
             case "play":
                 int pos = 1;
-                this.play(pos);
+                new Game().play(pos);
             case "quit":
                 this.caseQuit();
                 break;
@@ -91,50 +95,6 @@ public class Menu {
     public void caseQuit() {
         System.out.println("See you soon !");
         System.exit(0);
-    }
-
-    public int play(int pos) {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Position : " + pos + "/64");
-        System.out.println("'roll' to roll the dice.");
-        String userinput = input.nextLine();
-        switch (userinput) {
-            case "roll":
-                int dice1 = 0;
-                dice1 = 1 + (int) (Math.random() * 6);
-                pos += dice1;
-                System.out.println("Dice roll : " + dice1);
-                if (pos >= 64) {
-                    System.out.println("Congratulation you've finished ! What do you want to do now ?");
-                    System.out.println("restart");
-                    System.out.println("quit");
-                    input = new Scanner(System.in);
-                    userinput = input.nextLine();
-                    switch (userinput) {
-                        case "restart":
-                            pos = 0;
-                            this.play(pos);
-                            break;
-                        case "quit":
-                            this.caseQuit();
-                            break;
-                        default:
-                            System.out.println("Incorrect entry.");
-                            pos = 64;
-                    }
-
-                }
-                this.play(pos);
-                break;
-            case "quit":
-                this.caseQuit();
-                break;
-            default:
-                System.out.println("Incorrect entry.");
-                this.play(pos);
-        }
-
-        return pos;
     }
 
 }

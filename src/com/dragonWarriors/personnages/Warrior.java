@@ -32,4 +32,12 @@ public class Warrior extends Character {
         this.attack = attack;
     }
 
+    @Override
+    public String toString() {
+        return "Warrior{" +
+                "name='" + name + '\'' +
+                ", hp=" + hp +
+                ", attack=" + attack +
+                '}';
+    }
 }
