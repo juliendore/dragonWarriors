@@ -13,7 +13,9 @@ public class Game {
             case "roll":
                 int dice1 = 0;
                 dice1 = 1 + (int) (Math.random() * 6);
-                pos += dice1;
+                for (int i = 0; i < dice1; i++) {
+                    pos ++;
+                }
                 System.out.println("Dice roll : " + dice1);
                 if (pos >= 64) {
                     System.out.println("Congratulation you've finished ! What do you want to do now ?");
