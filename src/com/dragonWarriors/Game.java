@@ -28,8 +28,8 @@ public class Game {
                     throw new PersonnageHorsPlateauException();
                 }
                 for (int i = 0; i < dice1; i++) {
-                        pos++;
-                    }
+                    pos++;
+                }
                 System.out.println("Dice roll : " + dice1);
                 break;
             case "quit":
@@ -59,7 +59,12 @@ public class Game {
             }
 
         }
-        this.play(pos);
+        try {
+            this.play(pos);
+        } catch (PersonnageHorsPlateauException e) {
+        } finally {
+            this.play(50);
+        }
         return pos;
     }
 

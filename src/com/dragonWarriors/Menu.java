@@ -101,13 +101,14 @@ public class Menu {
                 this.next(player);
                 break;
             case "play":
-                int pos = 1;
+
                 Game game = new Game();
                 try {
-                    game.play(pos);
+                    game.play(1);
                 } catch (PersonnageHorsPlateauException e) {
-                    pos = 50;
-                    game.play(pos);
+
+                } finally {
+                    game.play(50);
                 }
                 break;
             case "quit":
