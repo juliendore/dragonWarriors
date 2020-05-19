@@ -2,8 +2,14 @@ package com.dragonWarriors;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws PersonnageHorsPlateauException {
         Menu menu = new Menu();
-        menu.welcome();
+        try {
+            menu.welcome();
+        } catch (PersonnageHorsPlateauException e) {
+            Game game = new Game();
+            game.play(50);
+        }
+
     }
 }

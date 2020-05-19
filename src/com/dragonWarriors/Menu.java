@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Menu {
 
-    public void welcome() {
+    public void welcome() throws PersonnageHorsPlateauException {
         Scanner input = new Scanner(System.in);
         System.out.println("===============");
         System.out.println("Dragon Warriors");
@@ -32,7 +32,7 @@ public class Menu {
         }
     }
 
-    public void newCharacter() {
+    public void newCharacter() throws PersonnageHorsPlateauException {
         System.out.println("===============");
         System.out.println("Choose your character");
         System.out.println("    warrior");
@@ -69,7 +69,7 @@ public class Menu {
         }
     }
 
-    public void next(Character player) {
+    public void next(Character player) throws PersonnageHorsPlateauException {
         System.out.println("===============");
         System.out.println("What do you want to do now ?");
         System.out.println("    infos");
@@ -103,11 +103,13 @@ public class Menu {
             case "play":
                 int pos = 1;
                 Game game = new Game();
-//                try {
-                game.play(pos);
-//                } catch (PersonnageHorsPlateauException e) {
-//                    e.printStackTrace();
-//                }
+                try {
+                    game.play(pos);
+                } catch (PersonnageHorsPlateauException e) {
+                    pos = 50;
+                    game.play(pos);
+                }
+                break;
             case "quit":
                 this.caseQuit();
                 break;

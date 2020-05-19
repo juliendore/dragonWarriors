@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Game {
 
-    public void play(int pos) {
+    public int play(int pos) throws PersonnageHorsPlateauException {
         Scanner input = new Scanner(System.in);
         System.out.println("===============");
         System.out.println("Position : " + pos + "/64");
@@ -21,18 +21,16 @@ public class Game {
                 pos = input.nextInt();
                 break;
             case "roll":
+
                 int dice1 = 0;
                 dice1 = 1 + (int) (Math.random() * 6);
-//                if (pos + dice1 > 64) {
-//                    throw new PersonnageHorsPlateauException(pos);
-//                } else {
-                for (int i = 0; i < dice1; i++) {
-                    pos++;
+                if (pos + dice1 > 64) {
+                    throw new PersonnageHorsPlateauException();
                 }
-//                }
+                for (int i = 0; i < dice1; i++) {
+                        pos++;
+                    }
                 System.out.println("Dice roll : " + dice1);
-
-//                this.play(pos);
                 break;
             case "quit":
                 this.caseQuit();
@@ -41,7 +39,7 @@ public class Game {
                 System.out.println("Incorrect entry.");
                 this.play(pos);
         }
-        if (pos >= 64) {
+        if (pos == 64) {
             System.out.println("Congratulation you've finished ! What do you want to do now ?");
             System.out.println("restart");
             System.out.println("quit");
@@ -62,8 +60,7 @@ public class Game {
 
         }
         this.play(pos);
-
-//        return pos;
+        return pos;
     }
 
     public void caseQuit() {
