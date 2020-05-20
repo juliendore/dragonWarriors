@@ -1,12 +1,10 @@
 package com.dragonWarriors;
 
-import com.dragonWarriors.PersonnageHorsPlateauException;
-
 import java.util.Scanner;
 
 public class Game {
 
-    public int play(int pos) throws PersonnageHorsPlateauException {
+    public int play(int pos) {
         Scanner input = new Scanner(System.in);
         System.out.println("===============");
         System.out.println("Position : " + pos + "/64");
@@ -21,16 +19,12 @@ public class Game {
                 pos = input.nextInt();
                 break;
             case "roll":
-
                 int dice1 = 0;
-                dice1 = 1 + (int) (Math.random() * 6);
-                if (pos + dice1 > 64) {
-                    throw new PersonnageHorsPlateauException();
+                try {
+                    pos = this.caseRoll(pos, dice1);
+                } catch (PersonnageHorsPlateauException e) {
+                    pos = 50;
                 }
-                for (int i = 0; i < dice1; i++) {
-                    pos++;
-                }
-                System.out.println("Dice roll : " + dice1);
                 break;
             case "quit":
                 this.caseQuit();
@@ -47,7 +41,7 @@ public class Game {
             userinput = input.nextLine();
             switch (userinput) {
                 case "restart":
-                    pos = 0;
+                    pos = 1;
                     this.play(pos);
                     break;
                 case "quit":
@@ -59,12 +53,22 @@ public class Game {
             }
 
         }
-        try {
-            this.play(pos);
-        } catch (PersonnageHorsPlateauException e) {
-        } finally {
-            this.play(50);
+        this.play(pos);
+
+        return pos;
+    }
+
+    public int caseRoll(int pos, int dice1) throws PersonnageHorsPlateauException {
+        dice1 = 1 + (int) (Math.random() * 6);
+        System.out.println("Dice roll : " + dice1);
+        if (pos + dice1 > 64) {
+            throw new PersonnageHorsPlateauException();
         }
+
+        for (int i = 0; i < dice1; i++) {
+            pos++;
+        }
+
         return pos;
     }
 

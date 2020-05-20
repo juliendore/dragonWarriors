@@ -3,13 +3,13 @@ package com.dragonWarriors;
 import com.dragonWarriors.personnages.*;
 import com.dragonWarriors.personnages.Character;
 
-import com.dragonWarriors.Game.*;
+//import com.dragonWarriors.Game.*;
 
 import java.util.Scanner;
 
 public class Menu {
 
-    public void welcome() throws PersonnageHorsPlateauException {
+    public void welcome() {
         Scanner input = new Scanner(System.in);
         System.out.println("===============");
         System.out.println("Dragon Warriors");
@@ -19,20 +19,23 @@ public class Menu {
         System.out.println("===============");
 
         String userinput = input.nextLine();
-        switch (userinput) {
-            case "start":
-                this.newCharacter();
-                break;
-            case "quit":
-                this.caseQuit();
-                break;
-            default:
-                System.out.println("Incorrect entry.");
-                this.welcome();
+        boolean isOkay = true;
+        while (isOkay) {
+            switch (userinput) {
+                case "start":
+                    this.newCharacter();
+                    isOkay = false;
+                    break;
+                case "quit":
+                    this.caseQuit();
+                    break;
+                default:
+                    System.out.println("Incorrect entry.");
+            }
         }
     }
 
-    public void newCharacter() throws PersonnageHorsPlateauException {
+    private void newCharacter() {
         System.out.println("===============");
         System.out.println("Choose your character");
         System.out.println("    warrior");
@@ -69,7 +72,7 @@ public class Menu {
         }
     }
 
-    public void next(Character player) throws PersonnageHorsPlateauException {
+    public void next(Character player) {
         System.out.println("===============");
         System.out.println("What do you want to do now ?");
         System.out.println("    infos");
@@ -86,30 +89,20 @@ public class Menu {
                 System.out.println("  |  Hp : " + player.getHp());
                 System.out.println("  |  Attack : " + player.getAttack());
                 System.out.println("===============");
-
-//                System.out.println("recap : " + player.toString());
                 this.next(player);
                 break;
             case "rename":
                 System.out.println("===============");
                 System.out.println("What is your new name ?");
                 System.out.println("===============");
-
                 input = new Scanner(System.in);
                 userinput = input.nextLine();
                 player.setName(userinput);
                 this.next(player);
                 break;
             case "play":
-
                 Game game = new Game();
-                try {
-                    game.play(1);
-                } catch (PersonnageHorsPlateauException e) {
-
-                } finally {
-                    game.play(50);
-                }
+                game.play(1);
                 break;
             case "quit":
                 this.caseQuit();
@@ -123,8 +116,8 @@ public class Menu {
     public void caseQuit() {
         System.out.println("===============");
         System.out.println("See you soon !");
-        System.exit(0);
         System.out.println("===============");
+        System.exit(0);
     }
 
 }
