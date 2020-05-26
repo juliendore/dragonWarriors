@@ -1,13 +1,28 @@
 package com.dragonWarriors;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Game {
+public class Board {
 
-    public int play(int pos) {
+    private int pos;
+
+    private ArrayList<Case> board = new ArrayList<Case>();
+
+    public Board() {
+        this.pos = 1;
+
+        for (int i = 1; i < 5; i++) {
+            this.board.add(new Case(i));
+        }
+
+    }
+
+
+    public void play() {
         Scanner input = new Scanner(System.in);
         System.out.println("===============");
-        System.out.println("Position : " + pos + "/64");
+        System.out.println("Position : " + this.pos + "/64");
         System.out.println("'roll' to roll the dice.");
         System.out.println("===============");
         String userinput = input.nextLine();
@@ -16,14 +31,14 @@ public class Game {
                 System.out.println("===============");
                 System.out.println("debug mode, type wanted position.");
                 input = new Scanner(System.in);
-                pos = input.nextInt();
+                this.pos = input.nextInt();
                 break;
             case "roll":
                 int dice1 = 0;
                 try {
-                    pos = this.caseRoll(pos, dice1);
+                    this.pos = this.caseRoll(this.pos, dice1);
                 } catch (PersonnageHorsPlateauException e) {
-                    pos = 58;
+                    this.pos = 58;
                 }
                 break;
             case "quit":
@@ -31,9 +46,9 @@ public class Game {
                 break;
             default:
                 System.out.println("Incorrect entry.");
-                this.play(pos);
+                this.play();
         }
-        if (pos == 64) {
+        if (this.pos == 64) {
             System.out.println("Congratulation you've finished ! What do you want to do now ?");
             System.out.println("restart");
             System.out.println("quit");
@@ -41,21 +56,20 @@ public class Game {
             userinput = input.nextLine();
             switch (userinput) {
                 case "restart":
-                    pos = 1;
-                    this.play(pos);
+                    this.pos = 1;
+                    this.play();
                     break;
                 case "quit":
                     this.caseQuit();
                     break;
                 default:
                     System.out.println("Incorrect entry.");
-                    pos = 64;
+                    this.pos = 64;
             }
 
         }
-        this.play(pos);
+        this.play();
 
-        return pos;
     }
 
     public int caseRoll(int pos, int dice1) throws PersonnageHorsPlateauException {
@@ -77,3 +91,5 @@ public class Game {
         System.exit(0);
     }
 }
+
+

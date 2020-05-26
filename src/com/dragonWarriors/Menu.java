@@ -101,8 +101,10 @@ public class Menu {
                 this.next(player);
                 break;
             case "play":
-                Game game = new Game();
-                game.play(1);
+//                Game game = new Game();
+//                game.play(1);
+                Board board = new Board();
+                board.play();
                 break;
             case "quit":
                 this.caseQuit();
