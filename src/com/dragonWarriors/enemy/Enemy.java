@@ -1,6 +1,8 @@
 package com.dragonWarriors.enemy;
 
-public class Enemy {
+import com.dragonWarriors.Case;
+
+public class Enemy implements Case {
     private String name;
     private int hp;
     private int attack;
@@ -42,5 +44,10 @@ public class Enemy {
 
     public void setAttack(int attack) {
         this.attack = attack;
+    }
+
+    @Override
+    public void doThis() {
+        System.out.println("Voici l'attaque de l'ennemi");
     }
 }

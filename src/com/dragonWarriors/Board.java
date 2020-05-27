@@ -1,5 +1,9 @@
 package com.dragonWarriors;
 
+import com.dragonWarriors.bonus.Bonus;
+import com.dragonWarriors.empty.Empty;
+import com.dragonWarriors.enemy.Enemy;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,21 +11,31 @@ public class Board {
 
     private int pos;
 
-    private ArrayList<Case> board = new ArrayList<Case>();
+    private ArrayList<Case> board = new ArrayList();
 
     public Board() {
         this.pos = 1;
-
-        for (int i = 1; i < 5; i++) {
-            this.board.add(new Case(i));
+        for (int i = 0; i < 4; i++) {
+            int casenum = i+1;
+            switch (i) {
+                case 1:
+                    this.board.add(new Enemy("Drago the cruel Dragon"));
+                    break;
+                case 3:
+                    this.board.add(new Bonus());
+                    break;
+                default:
+                    this.board.add(new Empty());
+            }
+            System.out.println("Case " + casenum + " : " + this.board.get(i).getClass().getSimpleName() + " case");
+            this.board.get(i).doThis();
+            System.out.println("===============");
         }
-
     }
 
 
     public void play() {
         Scanner input = new Scanner(System.in);
-        System.out.println("===============");
         System.out.println("Position : " + this.pos + "/64");
         System.out.println("'roll' to roll the dice.");
         System.out.println("===============");

@@ -1,12 +1,12 @@
-package com.dragonWarriors.bonus;
+package com.dragonWarriors.empty;
 
 import com.dragonWarriors.Case;
 
-public class Bonus implements Case {
+public class Empty implements Case {
 
     private String name;
 
-    public Bonus() {
+    public Empty() {
 
     }
 
@@ -20,6 +20,6 @@ public class Bonus implements Case {
 
     @Override
     public void doThis() {
-        System.out.println("Voici le super bonus");
+        System.out.println("I ain't doing shit men !");
     }
 }

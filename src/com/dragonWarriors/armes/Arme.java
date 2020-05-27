@@ -18,7 +18,7 @@ public class Arme {
     }
 
 
-    public String getName() {
+    public String getName() {   
         return name;
     }
 
