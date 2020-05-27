@@ -1,25 +1,17 @@
 package com.dragonWarriors.empty;
 
 import com.dragonWarriors.Case;
+import com.dragonWarriors.personnages.Character;
+
 
 public class Empty implements Case {
-
-    private String name;
 
     public Empty() {
 
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
-    public void doThis() {
-        System.out.println("I ain't doing shit men !");
+    public void doThis(Character player) {
+        System.out.println("Nothing happens here.");
     }
 }

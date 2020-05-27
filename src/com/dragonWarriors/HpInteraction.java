@@ -2,8 +2,8 @@ package com.dragonWarriors;
 
 import com.dragonWarriors.personnages.Character;
 
-public interface Case {
+public interface HpInteraction {
 
-    public void doThis(Character player);
+    public void hpInteraction(Character player);
 
 }

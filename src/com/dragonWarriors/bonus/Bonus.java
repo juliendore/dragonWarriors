@@ -1,8 +1,11 @@
 package com.dragonWarriors.bonus;
 
 import com.dragonWarriors.Case;
+import com.dragonWarriors.HpInteraction;
+import com.dragonWarriors.personnages.Character;
 
-public class Bonus implements Case {
+
+public class Bonus implements Case, HpInteraction {
 
     private String name;
 
@@ -19,7 +22,14 @@ public class Bonus implements Case {
     }
 
     @Override
-    public void doThis() {
-        System.out.println("Voici le super bonus");
+    public void doThis(Character player) {
+        System.out.println("Great bonus !");
+        this.hpInteraction(player);
+    }
+
+    @Override
+    public void hpInteraction(Character player) {
+        System.out.println("Yay you can now benefit from + 8 hp.");
+        player.setHp(player.getHp() + 8);
     }
 }

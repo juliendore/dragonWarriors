@@ -3,10 +3,9 @@ package com.dragonWarriors.personnages;
 public abstract class Character {
     private String name;
     private int hp;
-    private int attack;
+    private int strength;
 
     public Character() {
-
     }
 
     public Character(String name) {
@@ -16,7 +15,7 @@ public abstract class Character {
     public Character(String name, int hp, int attack) {
         this.name = name;
         this.hp = hp;
-        this.attack = attack;
+        this.strength = attack;
     }
 
     public String getName() {
@@ -35,12 +34,12 @@ public abstract class Character {
         this.hp = hp;
     }
 
-    public int getAttack() {
-        return this.attack;
+    public int getStrength() {
+        return this.strength;
     }
 
-    public void setAttack(int attack) {
-        this.attack = attack;
+    public void setStrength(int strength) {
+        this.strength = strength;
     }
 
 
@@ -49,7 +48,7 @@ public abstract class Character {
         return "Character{" +
                 "name='" + name + '\'' +
                 ", hp=" + hp +
-                ", attack=" + attack +
+                ", attack=" + strength +
                 '}';
     }
 }

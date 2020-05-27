@@ -3,9 +3,12 @@ package com.dragonWarriors;
 import com.dragonWarriors.bonus.Bonus;
 import com.dragonWarriors.empty.Empty;
 import com.dragonWarriors.enemy.Enemy;
-
+import com.dragonWarriors.personnages.Character;
+import com.dragonWarriors.weapons.Weapon;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+
 
 public class Board {
 
@@ -16,10 +19,12 @@ public class Board {
     public Board() {
         this.pos = 1;
         for (int i = 0; i < 4; i++) {
-            int casenum = i+1;
             switch (i) {
                 case 1:
                     this.board.add(new Enemy("Drago the cruel Dragon"));
+                    break;
+                case 2:
+                    this.board.add(new Weapon("Dragon slayer sword", 10));
                     break;
                 case 3:
                     this.board.add(new Bonus());
@@ -27,16 +32,17 @@ public class Board {
                 default:
                     this.board.add(new Empty());
             }
-            System.out.println("Case " + casenum + " : " + this.board.get(i).getClass().getSimpleName() + " case");
-            this.board.get(i).doThis();
-            System.out.println("===============");
         }
     }
 
 
-    public void play() {
+    public void play(Character player) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Position : " + this.pos + "/64");
+        System.out.println("Current position > " + this.pos + " :  " + this.board.get(this.pos - 1).getClass().getSimpleName() + " case");
+        this.board.get(this.pos - 1).doThis(player);
+        System.out.println("Your stats :");
+        System.out.println("  |  Hp : " + player.getHp());
+        System.out.println("  |  Strength : " + player.getStrength());
         System.out.println("'roll' to roll the dice.");
         System.out.println("===============");
         String userinput = input.nextLine();
@@ -60,7 +66,7 @@ public class Board {
                 break;
             default:
                 System.out.println("Incorrect entry.");
-                this.play();
+                this.play(player);
         }
         if (this.pos == 64) {
             System.out.println("Congratulation you've finished ! What do you want to do now ?");
@@ -71,7 +77,7 @@ public class Board {
             switch (userinput) {
                 case "restart":
                     this.pos = 1;
-                    this.play();
+                    this.play(player);
                     break;
                 case "quit":
                     this.caseQuit();
@@ -82,12 +88,13 @@ public class Board {
             }
 
         }
-        this.play();
+        this.play(player);
 
     }
 
     public int caseRoll(int pos, int dice1) throws PersonnageHorsPlateauException {
-        dice1 = 1 + (int) (Math.random() * 6);
+//        dice1 = 1 + (int) (Math.random() * 6);
+        dice1 = 1;
         System.out.println("Dice roll : " + dice1);
         if (pos + dice1 > 64) {
             throw new PersonnageHorsPlateauException();
@@ -104,6 +111,7 @@ public class Board {
         System.out.println("See you soon !");
         System.exit(0);
     }
+
 }
 
 

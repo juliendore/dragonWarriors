@@ -31,6 +31,7 @@ public class Menu {
                     break;
                 default:
                     System.out.println("Incorrect entry.");
+                    this.welcome();
             }
         }
     }
@@ -83,16 +84,14 @@ public class Menu {
         String userinput = input.nextLine();
         switch (userinput) {
             case "infos":
-                System.out.println("===============");
                 System.out.println("  |  Name : " + player.getName());
-                System.out.println("  |  Type : " + player.getClass().getSimpleName());
+                System.out.println("  |  Class : " + player.getClass().getSimpleName());
                 System.out.println("  |  Hp : " + player.getHp());
-                System.out.println("  |  Attack : " + player.getAttack());
+                System.out.println("  |  Strength : " + player.getStrength());
                 System.out.println("===============");
                 this.next(player);
                 break;
             case "rename":
-                System.out.println("===============");
                 System.out.println("What is your new name ?");
                 System.out.println("===============");
                 input = new Scanner(System.in);
@@ -104,7 +103,7 @@ public class Menu {
 //                Game game = new Game();
 //                game.play(1);
                 Board board = new Board();
-                board.play();
+                board.play(player);
                 break;
             case "quit":
                 this.caseQuit();
