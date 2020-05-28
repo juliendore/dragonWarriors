@@ -3,7 +3,7 @@ package com.dragonWarriors.characters;
 public class Warrior extends Character {
 
     public Warrior(String name) {
-        super(name, 5, 5);
+        super(name, 5, 0);
     }
 
     public void sayHello() {

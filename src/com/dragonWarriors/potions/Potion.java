@@ -4,6 +4,8 @@ import com.dragonWarriors.interfaces.Case;
 import com.dragonWarriors.interfaces.HpInteraction;
 import com.dragonWarriors.characters.Character;
 
+import java.util.ArrayList;
+
 
 public abstract class Potion implements Case, HpInteraction {
 
@@ -28,7 +30,7 @@ public abstract class Potion implements Case, HpInteraction {
     }
 
     @Override
-    public void doThis(Character player) {
+    public void doThis(Character player, ArrayList board) {
         System.out.println("You find a " + this.name + " on the floor.");
         this.hpInteraction(player);
     }

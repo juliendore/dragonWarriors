@@ -6,6 +6,8 @@ import com.dragonWarriors.interfaces.Case;
 import com.dragonWarriors.interfaces.StrengthInteraction;
 import com.dragonWarriors.characters.Character;
 
+import java.util.ArrayList;
+
 public abstract class Weapon implements Case, StrengthInteraction {
 
     private String name;
@@ -48,7 +50,7 @@ public abstract class Weapon implements Case, StrengthInteraction {
     }
 
     @Override
-    public void doThis(Character player) {
+    public void doThis(Character player, ArrayList board) {
         if (player instanceof Warrior) {
             System.out.println("There is an " + this.getName() + ". You pick it up and perform a few swings with it");
             this.strengthInteraction(player);

@@ -5,6 +5,8 @@ import com.dragonWarriors.interfaces.Case;
 import com.dragonWarriors.interfaces.StrengthInteraction;
 import com.dragonWarriors.characters.Character;
 
+import java.util.ArrayList;
+
 public abstract class Spell implements Case, StrengthInteraction {
 
     private String name;
@@ -48,7 +50,7 @@ public abstract class Spell implements Case, StrengthInteraction {
     }
 
     @Override
-    public void doThis(Character player) {
+    public void doThis(Character player, ArrayList board) {
         if (player instanceof Wizard) {
             System.out.println("You learn to cast a " + this.getName() + " spell.");
             this.strengthInteraction(player);

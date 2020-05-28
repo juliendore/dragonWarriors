@@ -1,9 +1,9 @@
 package com.dragonWarriors;
 
+import com.dragonWarriors.characters.Warrior;
 import com.dragonWarriors.enemies.Gobelin;
 import com.dragonWarriors.enemies.Witch;
 import com.dragonWarriors.potions.BigPotion;
-import com.dragonWarriors.potions.Potion;
 import com.dragonWarriors.enemies.Dragon;
 import com.dragonWarriors.interfaces.Case;
 import com.dragonWarriors.characters.Character;
@@ -71,7 +71,7 @@ public class Board {
         }
 
         Collections.shuffle(board);
-//
+
 //        System.out.println("Nombre de cases : " + this.board.size());
 //        for (Case c : board
 //        ) {
@@ -82,14 +82,19 @@ public class Board {
 
 
     public void play(Character player) {
-        Scanner input = new Scanner(System.in);
         System.out.println("Current position > " + this.pos + "/64");
-        this.board.get(this.pos - 1).doThis(player);
         System.out.println("Your stats :");
         System.out.println("  |  Hp : " + player.getHp());
         System.out.println("  |  Strength : " + player.getStrength());
+        this.board.get(this.pos - 1).doThis(player, this.board);
+
+
+        //gameover
+
+
         System.out.println("'roll' to roll the dice.");
         System.out.println("===============");
+        Scanner input = new Scanner(System.in);
         String userinput = input.nextLine();
         switch (userinput) {
             case "debug":
@@ -103,7 +108,7 @@ public class Board {
                 try {
                     this.pos = this.caseRoll(this.pos, dice1);
                 } catch (PersonnageHorsPlateauException e) {
-                    this.pos = 58;
+                    this.pos = 50;
                 }
                 break;
             case "quit":
