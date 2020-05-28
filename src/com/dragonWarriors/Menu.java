@@ -23,7 +23,12 @@ public class Menu {
         while (isOkay) {
             switch (userinput) {
                 case "start":
-                    this.newCharacter();
+                    System.out.println("===============");
+                    System.out.println("What is your name ?");
+                    System.out.println("===============");
+                    Scanner sc = new Scanner(System.in);
+                    String name = sc.nextLine();
+                    this.newCharacter(name);
                     isOkay = false;
                     break;
                 case "quit":
@@ -36,7 +41,7 @@ public class Menu {
         }
     }
 
-    private void newCharacter() {
+    private void newCharacter(String name) {
         System.out.println("===============");
         System.out.println("Choose your character");
         System.out.println("    warrior");
@@ -45,12 +50,7 @@ public class Menu {
 
         Scanner input = new Scanner(System.in);
         String userinput = input.nextLine();
-        System.out.println("===============");
-        System.out.println("What is your name ?");
-        System.out.println("===============");
 
-        Scanner sc = new Scanner(System.in);
-        String name = sc.nextLine();
         switch (userinput) {
             case "warrior":
                 Warrior warrior = new Warrior(name);
@@ -69,7 +69,7 @@ public class Menu {
                 System.out.println("===============");
                 System.out.println("Incorrect entry.");
                 System.out.println("===============");
-                this.newCharacter();
+                this.newCharacter(name);
         }
     }
 

@@ -1,5 +1,7 @@
 package com.dragonWarriors.weapons;
 
+import com.dragonWarriors.characters.Warrior;
+import com.dragonWarriors.characters.Wizard;
 import com.dragonWarriors.interfaces.Case;
 import com.dragonWarriors.interfaces.StrengthInteraction;
 import com.dragonWarriors.characters.Character;
@@ -47,9 +49,12 @@ public abstract class Weapon implements Case, StrengthInteraction {
 
     @Override
     public void doThis(Character player) {
-        System.out.println("There is a " + this.getName() + ".");
-        System.out.println("You pick up the weapon");
-        this.strengthInteraction(player);
+        if (player instanceof Warrior) {
+            System.out.println("There is a " + this.getName() + ". You pick it up and perform a few swings with it");
+            this.strengthInteraction(player);
+        } else {
+            System.out.println("You find a " + this.getName() + ", but you have no idea of how to use it.");
+        }
     }
 
     @Override

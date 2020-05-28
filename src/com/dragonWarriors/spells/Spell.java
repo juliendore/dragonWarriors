@@ -1,5 +1,6 @@
 package com.dragonWarriors.spells;
 
+import com.dragonWarriors.characters.Wizard;
 import com.dragonWarriors.interfaces.Case;
 import com.dragonWarriors.interfaces.StrengthInteraction;
 import com.dragonWarriors.characters.Character;
@@ -48,8 +49,12 @@ public abstract class Spell implements Case, StrengthInteraction {
 
     @Override
     public void doThis(Character player) {
-        System.out.println("You learn to cast a " + this.getName() + " spell.");
-        this.strengthInteraction(player);
+        if (player instanceof Wizard) {
+            System.out.println("You learn to cast a " + this.getName() + " spell.");
+            this.strengthInteraction(player);
+        } else {
+            System.out.println("You find a " + this.getName() + " spell, but you have no idea of how to use it.");
+        }
     }
 
     @Override

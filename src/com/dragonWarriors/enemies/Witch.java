@@ -2,7 +2,7 @@ package com.dragonWarriors.enemies;
 
 public class Witch extends Enemy {
 
-    public Witch(String name) {
-        super(name, 3, 5);
+    public Witch() {
+        super("sexy but deadly witch", 3, 5);
     }
 }

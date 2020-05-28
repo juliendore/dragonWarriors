@@ -25,39 +25,89 @@ public class Board {
 
     public Board() {
         this.pos = 1;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 64; i++) {
             switch (i) {
-                case 1:
-                    this.board.add(new Dragon("Terribilus the terrible dragon"));
+                // Instances of the enemies on the board
+                case 45:
+                case 52:
+                case 56:
+                case 62:
+                    this.board.add(new Dragon());
                     break;
-                case 2:
-                    this.board.add(new StandardPotion());
+                case 10:
+                case 20:
+                case 25:
+                case 32:
+                case 35:
+                case 36:
+                case 37:
+                case 40:
+                case 44:
+                case 47:
+                    this.board.add(new Witch());
                     break;
                 case 3:
-                    this.board.add(new BigPotion());
-                    break;
-                case 4:
-                    this.board.add(new Sword("Dragon slayer sword"));
-                    break;
-                case 5:
-                    this.board.add(new Mace("Dragon knocker mace"));
-                    break;
                 case 6:
-                    this.board.add(new Gobelin("Gobelino the gobelin"));
-                    break;
-                case 7:
-                    this.board.add(new Witch("Some king of sexy Witch"));
-                    break;
-                case 8:
-                    this.board.add(new Fire());
-                    break;
                 case 9:
+                case 12:
+                case 15:
+                case 18:
+                case 21:
+                case 24:
+                case 27:
+                case 30:
+                    this.board.add(new Gobelin());
+                    break;
+
+
+                // Instances of the loot on the board
+                //weapons
+                case 2:
+                case 11:
+                case 5:
+                case 22:
+                case 38:
+                    this.board.add(new Mace("Awesome mace"));
+                    break;
+                case 19:
+                case 26:
+                case 42:
+                case 53:
+                    this.board.add(new Sword("Awesome sword"));
+                    break;
+                //spells
+                case 1:
+                case 4:
+                case 8:
+                case 17:
+                case 23:
                     this.board.add(new Lightning());
                     break;
+                case 48:
+                case 49:
+                    this.board.add(new Fire());
+                    break;
+                //potions
+                case 7:
+                case 13:
+                case 31:
+                case 33:
+                case 39:
+                case 43:
+                    this.board.add(new StandardPotion());
+                    break;
+                case 28:
+                case 41:
+                    this.board.add(new BigPotion());
+                    break;
+
+
+                //empty cases
                 default:
                     this.board.add(new EmptyCase());
             }
         }
+        System.out.println("Nombre de cases : "+this.board.size());
     }
 
 
@@ -118,8 +168,8 @@ public class Board {
     }
 
     public int caseRoll(int pos, int dice1) throws PersonnageHorsPlateauException {
-//        dice1 = 1 + (int) (Math.random() * 6);
-        dice1 = 1;
+        dice1 = 1 + (int) (Math.random() * 6);
+//        dice1 = 1;
         System.out.println("Dice roll : " + dice1);
         if (pos + dice1 > 64) {
             throw new PersonnageHorsPlateauException();
