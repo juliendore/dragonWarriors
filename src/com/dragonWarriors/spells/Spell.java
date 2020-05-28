@@ -1,28 +1,29 @@
-package com.dragonWarriors.weapons;
+package com.dragonWarriors.spells;
 
 import com.dragonWarriors.interfaces.Case;
 import com.dragonWarriors.interfaces.StrengthInteraction;
 import com.dragonWarriors.characters.Character;
 
-public abstract class Weapon implements Case, StrengthInteraction {
+public abstract class Spell implements Case, StrengthInteraction {
 
     private String name;
     private int strength;
     private int speed;
 
-    public Weapon() {
+    public Spell() {
+
     }
 
-    public Weapon(String name) {
+    public Spell(String name) {
         this.name = name;
     }
 
-    public Weapon(String name, int strength) {
+    public Spell(String name, int strength) {
         this.name = name;
         this.strength = strength;
     }
 
-    public Weapon(String name, int strength, int speed) {
+    public Spell(String name, int strength, int speed) {
         this.name = name;
         this.strength = strength;
         this.speed = speed;
@@ -47,8 +48,7 @@ public abstract class Weapon implements Case, StrengthInteraction {
 
     @Override
     public void doThis(Character player) {
-        System.out.println("There is a " + this.getName() + ".");
-        System.out.println("You pick up the weapon");
+        System.out.println("You learn to cast a " + this.getName() + " spell.");
         this.strengthInteraction(player);
     }
 

@@ -1,4 +1,4 @@
-package com.dragonWarriors.personnages;
+package com.dragonWarriors.characters;
 
 public class Warrior extends Character {
 
@@ -7,9 +7,7 @@ public class Warrior extends Character {
     }
 
     public void sayHello() {
-        System.out.println("===============");
         System.out.println("I am a strong " + this.getClass().getSimpleName() + ", my name is " + this.getName() + ".");
-        System.out.println("===============");
     }
 
 }

@@ -1,13 +1,20 @@
 package com.dragonWarriors;
 
-import com.dragonWarriors.bonus.Bonus;
-import com.dragonWarriors.empty.Empty;
-import com.dragonWarriors.enemy.Enemy;
-import com.dragonWarriors.personnages.Character;
-import com.dragonWarriors.weapons.Weapon;
+import com.dragonWarriors.enemies.Gobelin;
+import com.dragonWarriors.enemies.Witch;
+import com.dragonWarriors.potions.BigPotion;
+import com.dragonWarriors.potions.Potion;
+import com.dragonWarriors.enemies.Dragon;
+import com.dragonWarriors.interfaces.Case;
+import com.dragonWarriors.characters.Character;
+import com.dragonWarriors.potions.StandardPotion;
+import com.dragonWarriors.spells.Fire;
+import com.dragonWarriors.spells.Lightning;
+import com.dragonWarriors.weapons.Mace;
+import com.dragonWarriors.weapons.Sword;
+
 import java.util.ArrayList;
 import java.util.Scanner;
-
 
 
 public class Board {
@@ -18,19 +25,37 @@ public class Board {
 
     public Board() {
         this.pos = 1;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 10; i++) {
             switch (i) {
                 case 1:
-                    this.board.add(new Enemy("Drago the cruel Dragon"));
+                    this.board.add(new Dragon("Terribilus the terrible dragon"));
                     break;
                 case 2:
-                    this.board.add(new Weapon("Dragon slayer sword", 10));
+                    this.board.add(new StandardPotion());
                     break;
                 case 3:
-                    this.board.add(new Bonus());
+                    this.board.add(new BigPotion());
+                    break;
+                case 4:
+                    this.board.add(new Sword("Dragon slayer sword"));
+                    break;
+                case 5:
+                    this.board.add(new Mace("Dragon knocker mace"));
+                    break;
+                case 6:
+                    this.board.add(new Gobelin("Gobelino the gobelin"));
+                    break;
+                case 7:
+                    this.board.add(new Witch("Some king of sexy Witch"));
+                    break;
+                case 8:
+                    this.board.add(new Fire());
+                    break;
+                case 9:
+                    this.board.add(new Lightning());
                     break;
                 default:
-                    this.board.add(new Empty());
+                    this.board.add(new EmptyCase());
             }
         }
     }
@@ -38,7 +63,7 @@ public class Board {
 
     public void play(Character player) {
         Scanner input = new Scanner(System.in);
-        System.out.println("Current position > " + this.pos + " :  " + this.board.get(this.pos - 1).getClass().getSimpleName() + " case");
+        System.out.println("Current position > " + this.pos + "/64");
         this.board.get(this.pos - 1).doThis(player);
         System.out.println("Your stats :");
         System.out.println("  |  Hp : " + player.getHp());

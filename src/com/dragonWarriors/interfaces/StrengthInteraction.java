@@ -1,6 +1,6 @@
-package com.dragonWarriors;
+package com.dragonWarriors.interfaces;
 
-import com.dragonWarriors.personnages.Character;
+import com.dragonWarriors.characters.Character;
 
 public interface StrengthInteraction {
 

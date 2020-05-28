@@ -1,4 +1,4 @@
-package com.dragonWarriors.personnages;
+package com.dragonWarriors.characters;
 
 public abstract class Character {
     private String name;

@@ -1,15 +1,14 @@
-package com.dragonWarriors.personnages;
+package com.dragonWarriors.characters;
 
-public class Magician extends Character {
+public class Wizard extends Character {
 
-    public Magician(String name) {
+    public Wizard(String name) {
         super(name, 3, 8);
     }
 
     public void sayHello() {
         System.out.println("===============");
         System.out.println("I am a mighty " + this.getClass().getSimpleName() + ", my name is " + this.getName() + ".");
-        System.out.println("===============");
 
     }
 

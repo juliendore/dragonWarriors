@@ -1,10 +1,10 @@
-package com.dragonWarriors.enemy;
+package com.dragonWarriors.enemies;
 
-import com.dragonWarriors.HpInteraction;
-import com.dragonWarriors.Case;
-import com.dragonWarriors.personnages.Character;
+import com.dragonWarriors.interfaces.HpInteraction;
+import com.dragonWarriors.interfaces.Case;
+import com.dragonWarriors.characters.Character;
 
-public class Enemy implements Case, HpInteraction {
+public abstract class Enemy implements Case, HpInteraction {
     private String name;
     private int hp;
     private int strength;
@@ -17,12 +17,11 @@ public class Enemy implements Case, HpInteraction {
         this.name = name;
     }
 
-    public Enemy(String name, int hp, int attack) {
+    public Enemy(String name, int hp, int strength) {
         this.name = name;
         this.hp = hp;
-        this.strength = attack;
+        this.strength = strength;
     }
-
 
     public String getName() {
         return name;
@@ -51,13 +50,14 @@ public class Enemy implements Case, HpInteraction {
     @Override
     public void doThis(Character player) {
         System.out.println("I am " + this.getName() + ".");
-        System.out.println("Here's the enemy's attack");
+        System.out.println("Here's " + this.getName() + "'s attack");
         hpInteraction(player);
     }
 
     @Override
     public void hpInteraction(Character player) {
-        System.out.println("Oh no you've just lost 1 hp !");
-        player.setHp(player.getHp() - 1);
+        int damage = (int) (this.getStrength() * 0.4);
+        System.out.println("Oh no you've just lost " + damage + " hp !");
+        player.setHp(player.getHp() - damage);
     }
 }

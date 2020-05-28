@@ -1,7 +1,7 @@
 package com.dragonWarriors;
 
-import com.dragonWarriors.personnages.*;
-import com.dragonWarriors.personnages.Character;
+import com.dragonWarriors.characters.*;
+import com.dragonWarriors.characters.Character;
 
 //import com.dragonWarriors.Game.*;
 
@@ -40,7 +40,7 @@ public class Menu {
         System.out.println("===============");
         System.out.println("Choose your character");
         System.out.println("    warrior");
-        System.out.println("    magician");
+        System.out.println("    wizard");
         System.out.println("===============");
 
         Scanner input = new Scanner(System.in);
@@ -57,10 +57,10 @@ public class Menu {
                 warrior.sayHello();
                 next(warrior);
                 break;
-            case "magician":
-                Magician magician = new Magician(name);
-                magician.sayHello();
-                next(magician);
+            case "wizard":
+                Wizard wizard = new Wizard(name);
+                wizard.sayHello();
+                next(wizard);
                 break;
             case "quit":
                 this.caseQuit();
