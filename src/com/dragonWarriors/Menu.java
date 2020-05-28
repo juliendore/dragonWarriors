@@ -66,9 +66,7 @@ public class Menu {
                 this.caseQuit();
                 break;
             default:
-                System.out.println("===============");
                 System.out.println("Incorrect entry.");
-                System.out.println("===============");
                 this.newCharacter(name);
         }
     }

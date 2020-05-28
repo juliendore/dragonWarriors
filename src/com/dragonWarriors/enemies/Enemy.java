@@ -49,8 +49,8 @@ public abstract class Enemy implements Case, HpInteraction {
 
     @Override
     public void doThis(Character player) {
-        System.out.println("I am " + this.getName() + ".");
-        System.out.println("Here's " + this.getName() + "'s attack");
+        System.out.println("I am the " + this.getName() + ".");
+        System.out.println("Here is the " + this.getName() + "'s attack");
         hpInteraction(player);
     }
 

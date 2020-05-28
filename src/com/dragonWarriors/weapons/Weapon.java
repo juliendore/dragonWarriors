@@ -50,10 +50,10 @@ public abstract class Weapon implements Case, StrengthInteraction {
     @Override
     public void doThis(Character player) {
         if (player instanceof Warrior) {
-            System.out.println("There is a " + this.getName() + ". You pick it up and perform a few swings with it");
+            System.out.println("There is an " + this.getName() + ". You pick it up and perform a few swings with it");
             this.strengthInteraction(player);
         } else {
-            System.out.println("You find a " + this.getName() + ", but you have no idea of how to use it.");
+            System.out.println("You find an " + this.getName() + ", but you have no idea of how to use it.");
         }
     }
 

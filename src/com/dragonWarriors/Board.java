@@ -14,6 +14,8 @@ import com.dragonWarriors.weapons.Mace;
 import com.dragonWarriors.weapons.Sword;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Scanner;
 
 
@@ -25,89 +27,57 @@ public class Board {
 
     public Board() {
         this.pos = 1;
-        for (int i = 0; i < 64; i++) {
-            switch (i) {
-                // Instances of the enemies on the board
-                case 45:
-                case 52:
-                case 56:
-                case 62:
-                    this.board.add(new Dragon());
-                    break;
-                case 10:
-                case 20:
-                case 25:
-                case 32:
-                case 35:
-                case 36:
-                case 37:
-                case 40:
-                case 44:
-                case 47:
-                    this.board.add(new Witch());
-                    break;
-                case 3:
-                case 6:
-                case 9:
-                case 12:
-                case 15:
-                case 18:
-                case 21:
-                case 24:
-                case 27:
-                case 30:
-                    this.board.add(new Gobelin());
-                    break;
+        int maxcases = 64;
+        int maxdragon = 4;
+        int maxgobelin = 10;
+        int maxwitch = 10;
+        int maxmace = 5;
+        int maxsword = 4;
+        int maxlighting = 5;
+        int maxfire = 2;
+        int maxstandardpotion = 6;
+        int maxbigpotion = 2;
+        int emptycases = maxcases - maxdragon - maxgobelin - maxwitch - maxmace - maxsword - maxlighting - maxfire - maxstandardpotion - maxbigpotion;
 
-
-                // Instances of the loot on the board
-                //weapons
-                case 2:
-                case 11:
-                case 5:
-                case 22:
-                case 38:
-                    this.board.add(new Mace("Awesome mace"));
-                    break;
-                case 19:
-                case 26:
-                case 42:
-                case 53:
-                    this.board.add(new Sword("Awesome sword"));
-                    break;
-                //spells
-                case 1:
-                case 4:
-                case 8:
-                case 17:
-                case 23:
-                    this.board.add(new Lightning());
-                    break;
-                case 48:
-                case 49:
-                    this.board.add(new Fire());
-                    break;
-                //potions
-                case 7:
-                case 13:
-                case 31:
-                case 33:
-                case 39:
-                case 43:
-                    this.board.add(new StandardPotion());
-                    break;
-                case 28:
-                case 41:
-                    this.board.add(new BigPotion());
-                    break;
-
-
-                //empty cases
-                default:
-                    this.board.add(new EmptyCase());
-            }
+        for (int i = 0; i < maxdragon; i++) {
+            this.board.add(new Dragon());
         }
-        System.out.println("Nombre de cases : "+this.board.size());
+        for (int i = 0; i < maxgobelin; i++) {
+            this.board.add(new Gobelin());
+        }
+        for (int i = 0; i < maxwitch; i++) {
+            this.board.add(new Witch());
+        }
+        for (int i = 0; i < maxmace; i++) {
+            this.board.add(new Mace("Awesome mace"));
+        }
+        for (int i = 0; i < maxsword; i++) {
+            this.board.add(new Sword("Awesome sword"));
+        }
+        for (int i = 0; i < maxlighting; i++) {
+            this.board.add(new Lightning());
+        }
+        for (int i = 0; i < maxfire; i++) {
+            this.board.add(new Fire());
+        }
+        for (int i = 0; i < maxstandardpotion; i++) {
+            this.board.add(new StandardPotion());
+        }
+        for (int i = 0; i < maxbigpotion; i++) {
+            this.board.add(new BigPotion());
+        }
+        for (int i = 0; i < emptycases; i++) {
+            this.board.add(new EmptyCase());
+        }
+
+        Collections.shuffle(board);
+//
+//        System.out.println("Nombre de cases : " + this.board.size());
+//        for (Case c : board
+//        ) {
+//            System.out.println(c);
+//        }
+
     }
 
 
