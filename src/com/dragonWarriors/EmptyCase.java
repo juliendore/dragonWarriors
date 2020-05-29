@@ -13,7 +13,7 @@ public class EmptyCase implements Case {
     }
 
     @Override
-    public void doThis(Character player, ArrayList board) {
+    public void doThis(Character player, ArrayList board, Game game) {
         System.out.println("Nothing happens here.");
     }
 }

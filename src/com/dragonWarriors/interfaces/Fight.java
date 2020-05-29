@@ -4,8 +4,8 @@ import com.dragonWarriors.Game;
 import com.dragonWarriors.characters.Character;
 import java.util.ArrayList;
 
-public interface Case {
+public interface Fight {
 
-    public void doThis(Character player, ArrayList board, Game game);
+    public void fight(Character player, ArrayList board, Game game);
 
 }

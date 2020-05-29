@@ -1,5 +1,7 @@
 package com.dragonWarriors.spells;
 
+import com.dragonWarriors.EmptyCase;
+import com.dragonWarriors.Game;
 import com.dragonWarriors.characters.Wizard;
 import com.dragonWarriors.interfaces.Case;
 import com.dragonWarriors.interfaces.StrengthInteraction;
@@ -50,10 +52,11 @@ public abstract class Spell implements Case, StrengthInteraction {
     }
 
     @Override
-    public void doThis(Character player, ArrayList board) {
+    public void doThis(Character player, ArrayList board, Game game){
         if (player instanceof Wizard) {
             System.out.println("You learn to cast a " + this.getName() + " spell.");
             this.strengthInteraction(player);
+            board.set(board.indexOf(this), new EmptyCase());
         } else {
             System.out.println("You find a " + this.getName() + " spell, but you have no idea of how to use it.");
         }
@@ -63,5 +66,8 @@ public abstract class Spell implements Case, StrengthInteraction {
     public void strengthInteraction(Character player) {
         System.out.println("Yay you can now benefit from + " + this.getStrength() + " strength.");
         player.setStrength(player.getStrength() + this.getStrength());
+        System.out.println("Your new stats :");
+        System.out.println("  |  Hp : " + player.getHp());
+        System.out.println("  |  Strength : " + player.getStrength());
     }
 }

@@ -1,8 +1,8 @@
 package com.dragonWarriors.enemies;
 
-import com.dragonWarriors.Board;
 import com.dragonWarriors.EmptyCase;
-import com.dragonWarriors.characters.Warrior;
+import com.dragonWarriors.Game;
+import com.dragonWarriors.interfaces.Fight;
 import com.dragonWarriors.interfaces.HpInteraction;
 import com.dragonWarriors.interfaces.Case;
 import com.dragonWarriors.characters.Character;
@@ -10,7 +10,7 @@ import com.dragonWarriors.characters.Character;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public abstract class Enemy implements Case, HpInteraction {
+public abstract class Enemy implements Case, HpInteraction, Fight {
     private String name;
     private int hp;
     private int strength;
@@ -54,16 +54,22 @@ public abstract class Enemy implements Case, HpInteraction {
     }
 
     @Override
-    public void doThis(Character player, ArrayList board) {
+    public void doThis(Character player, ArrayList board, Game game) {
         System.out.println("I am the " + this.getName() + ".");
+        fight(player, board, game);
+
+    }
+
+    @Override
+    public void fight(Character player, ArrayList board, Game game) {
         System.out.println("Enemy's stats :");
         System.out.println("  |  Hp : " + this.getHp());
         System.out.println("  |  Strength : " + this.getStrength());
         System.out.println("===============");
-
-
-        //nouvelle méthode ici
         System.out.println("What do you want to do");
+        System.out.println("    fight");
+        System.out.println("    flee");
+        System.out.println("===============");
         Scanner input = new Scanner(System.in);
         String userinput = input.nextLine();
         switch (userinput) {
@@ -72,32 +78,35 @@ public abstract class Enemy implements Case, HpInteraction {
                 System.out.println("Take this ! You make " + damage + " hp of damage to " + this.getName() + ".");
                 this.setHp(this.getHp() - damage);
                 if (this.getHp() > 0) {
-                    System.out.println("Here is the " + this.getName() + "'s attack");
-                    hpInteraction(player);
-                    this.doThis(player, board);
+                    this.hpInteraction(player);
+                    this.fight(player, board, game);
                 } else if (this.getHp() <= 0) {
-                    System.out.println("Ennemi mort");
+                    System.out.println("You've killed your enemy.");
                     board.set(board.indexOf(this), new EmptyCase());
                 }
                 break;
             case "flee":
-                //dothings
+                if (game.getPos() > 1) {
+                    System.out.println("You choose to run away ! You have to go back.");
+                    game.setPos(game.getPos() - 1);
+                    game.play(player);
+                } else {
+                    System.out.println("You can't run away ! You have to face your enemy");
+                    this.fight(player, board, game);
+                }
                 break;
             default:
-                //dothings
-                this.doThis(player, board);
-
-
+                System.out.println("Incorrect entry.");
+                this.fight(player, board, game);
         }
+
     }
 
     @Override
     public void hpInteraction(Character player) {
         int damage = (int) (this.getStrength() * 0.4);
         player.setHp(player.getHp() - damage);
-
-        System.out.println("Oh no you've just lost " + damage + " hp !");
-
+        System.out.println("Here is the " + this.getName() + "'s attack. You take " + damage + " hp of damage.");
         if (player.getHp() <= 0) {
             System.out.println("                     _           _");
             System.out.println("                   _/ \\ _______ / \\_ ");
@@ -123,10 +132,7 @@ public abstract class Enemy implements Case, HpInteraction {
             System.out.println(" \\______  (____  /__|_|  /\\___  >  \\____/ \\_/  \\___  >__|   ");
             System.out.println("        \\/     \\/      \\/     \\/                   \\/       ");
             System.exit(0);
-//            Board.pos = 1;
-//            this.play(new Warrior(player.getName()));
         }
-
         System.out.println("Your stats :");
         System.out.println("  |  Hp : " + player.getHp());
         System.out.println("  |  Strength : " + player.getStrength());

@@ -134,8 +134,8 @@ public class Menu {
                 this.next(player);
                 break;
             case "play":
-                Board board = new Board();
-                board.play(player);
+                Game game = new Game();
+                game.play(player);
                 break;
             case "quit":
                 this.caseQuit();
