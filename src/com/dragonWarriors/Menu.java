@@ -2,11 +2,19 @@ package com.dragonWarriors;
 
 import com.dragonWarriors.characters.*;
 import com.dragonWarriors.characters.Character;
-
 import java.util.Scanner;
 
+/**
+ * La classe Menu permet d'afficher le menu d'accueil, d'instancier un nouveau personnage, de lancer une partie et de
+ * quitter le programme.
+ *
+ */
 public class Menu {
 
+    /**
+     * Cette méthode permet de demander à l'utilisateur s'il souhaite commencer à jouer, auquel cas il pourra
+     * saisir son nom (qui deviendra le nom du personnage plus tard) ou quitter le programme.
+     */
     public void welcome() {
         Scanner input = new Scanner(System.in);
 
@@ -51,6 +59,12 @@ public class Menu {
         }
     }
 
+    /**
+     * Cette méthode à l'utilisateur de choisir s'il veut être un guerrier(warrior) ou un magicien(wizard). En fonction
+     * de ce choix, une instance de la classe Warrior ou Wizard est créée.
+     *
+     * @param name le nom que le personnage va prendre, renseigné par l'utilisateur juste avant.
+     */
     private void newCharacter(String name) {
         System.out.println("===============");
         System.out.println("Choose your character");
@@ -79,6 +93,20 @@ public class Menu {
         }
     }
 
+    /**
+     * Une fois le personnage créé, cette méthode permet à l'utilisateur d'obtenir un récaptitulatif des caractéristiques
+     * de son personnage.
+     * infos
+     *|  Name : Toto
+     *|  Class : Warrior
+     *|  Hp : 5
+     *|  Strength : 5
+     *
+     * Eventuellement de changer le nom de son personnage s'il le souhaite. Enfin, l'utilisateur choisir de commencer
+     * une nouvelle partie.
+     *
+     * @param player une instance de la classe Warrior ou Wizard (qui hérite de Character), le personnage créé précedemment.
+     */
     public void next(Character player) {
         System.out.println("===============");
         System.out.println("What do you want to do now ?");
@@ -117,6 +145,11 @@ public class Menu {
         }
     }
 
+
+    /**
+     * Une méthode qui permet de quitter le programme après avoir affiché un message d'au revoir. Méthode statique qui
+     * sera appelée à chaque fois que l'utilisateur peut et veut quitter la partie.
+     */
     public static void caseQuit() {
         System.out.println("See you soon !");
         System.exit(0);

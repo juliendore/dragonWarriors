@@ -19,17 +19,30 @@ import java.util.Collections;
 import java.util.Scanner;
 
 
+/**
+ * La classe Game permet de gérer tout le dérouler d'une partie.
+ */
 public class Game {
 
+    /**
+     * Position du joueur sur le plateau.
+     */
     private int pos;
 
+    /**
+     * Plateau de jeu. Une ArrayList qui contiendra des implémentations de l'interface Case.
+     */
     private ArrayList<Case> board = new ArrayList();
 
+    /**
+     * Constructeur : initialise la position à 1, génére un plateau de jeu, puis répartit aléatoirement les éléments du
+     * plateau.
+     */
     public Game() {
 
         this.pos = 1;
 
-        this.randomBoard(64, 4, 10, 10, 5, 4, 5, 2, 6, 2);
+        this.boardSettings(64, 4, 10, 10, 5, 4, 5, 2, 6, 2);
 
         Collections.shuffle(this.board);
 
@@ -43,6 +56,19 @@ public class Game {
         this.pos = pos;
     }
 
+    /**
+     * Méthode principale des mécaniques de jeu. Renseigne sur la position et les statistiques actuelles du personnage,
+     * fais interagir le personnage avec la case sur laquelle il se trouve. Après quoi l'utilisateur relancera le dé
+     * pour un nouveau tour de jeu.
+     * <p>
+     * Gestion de l'exception PersonnageHorsPlateauException au cas où le joueur dépasse la case finale, retour à la
+     * position spécifiée dans le bloc catch.
+     * <p>
+     * Gestion du cas où le joueur termine la partie. Une fois sur la case finale il peut choisir de recommencer une
+     * partie (reset position 1 et reset des statistiques) ou de quitter.
+     *
+     * @param player une instance d'une classe fille de la classe Character. Le personnage de l'utilisateur.
+     */
     public void play(Character player) {
         System.out.println("Current position > " + this.pos + "/64");
         System.out.println("Your stats :");
@@ -61,9 +87,8 @@ public class Game {
                 this.pos = input.nextInt();
                 break;
             case "roll":
-                int dice1 = 0;
                 try {
-                    this.pos = this.caseRoll(this.pos, dice1);
+                    this.caseRoll();
                 } catch (PersonnageHorsPlateauException e) {
                     this.pos = 50;
                 }
@@ -102,8 +127,24 @@ public class Game {
         this.play(player);
     }
 
-    private void randomBoard(int maxcases, int maxdragon, int maxgobelin, int maxwitch, int maxmace, int maxsword,
-                             int maxlighting, int maxfire, int maxstandardpotion, int maxbigpotion) {
+    /**
+     * Méthode de génération du plateau de jeu. Cette méthode permet de générer le nombre voulu de élément du
+     * plateau en les renseignants dans les paramètres. Après avoir intégré les cases spéciales, la méthode comble
+     * l'écart entre les cases spéciales et le nombre de cases total voulu en créant des cases vides.
+     *
+     * @param maxcases          Nombre total de cases voulu.
+     * @param maxdragon         Nombre de dragons.
+     * @param maxgobelin        Nombre de gobelins.
+     * @param maxwitch          Nombre de sorcières(witch).
+     * @param maxmace           Nombre de massues(mace).
+     * @param maxsword          Nombre d'épées(sword).
+     * @param maxlighting       Nombre de sorts éclair(lightning).
+     * @param maxfire           Nombre de sorts de feu(fire).
+     * @param maxstandardpotion Nombre de potions standardes.
+     * @param maxbigpotion      Nombre de grandes potions.
+     */
+    private void boardSettings(int maxcases, int maxdragon, int maxgobelin, int maxwitch, int maxmace, int maxsword,
+                               int maxlighting, int maxfire, int maxstandardpotion, int maxbigpotion) {
         int emptycases = maxcases - maxdragon - maxgobelin - maxwitch - maxmace - maxsword - maxlighting - maxfire - maxstandardpotion - maxbigpotion;
 
         for (int i = 0; i < maxdragon; i++) {
@@ -139,16 +180,23 @@ public class Game {
 
     }
 
-    public int caseRoll(int pos, int dice1) throws PersonnageHorsPlateauException {
+    /**
+     * Cette méthode permet de lancer un dé pour déterminer de combien le joueur peut avancer.
+     *
+     * @throws PersonnageHorsPlateauException Cas d'exception : Si la somme du lancer de dé et de la position dépasse
+     *                                        le nombre total de cases du plateau le personnage sera considéré comme
+     *                                        hors du plateau.
+     */
+    private void caseRoll() throws PersonnageHorsPlateauException {
+        int dice1 = 0;
         dice1 = 1 + (int) (Math.random() * 6);
         System.out.println("Dice roll : " + dice1);
-        if (pos + dice1 > 64) {
+        if (this.pos + dice1 > this.board.size()) {
             throw new PersonnageHorsPlateauException();
         }
         for (int i = 0; i < dice1; i++) {
-            pos++;
+            this.pos++;
         }
-        return pos;
     }
 
 }

@@ -11,19 +11,53 @@ import com.dragonWarriors.characters.Character;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Classe abstraite qui permet l'instanciation d'un ennemi et la gestion d'un combat avec ce dernier.
+ */
 public abstract class Enemy implements Case, HpInteraction, Fight {
+
+
+    /**
+     * Nom de l'ennemi
+     */
     private String name;
+
+
+    /**
+     * Points de vie de l'ennemi
+     */
     private int hp;
+
+
+    /**
+     * Force de l'ennemi
+     */
     private int strength;
 
+
+    /**
+     * Constructeur de la classe.
+     */
     public Enemy() {
 
     }
 
+    /**
+     * Constructeur de la classe.
+     *
+     * @param name nom de l'ennemi.
+     */
     public Enemy(String name) {
         this.name = name;
     }
 
+    /**
+     * Constructeur complet de la classe.
+     *
+     * @param name     nom de l'ennemi
+     * @param hp       points de vie de l'ennemi
+     * @param strength force de l'ennemi
+     */
     public Enemy(String name, int hp, int strength) {
         this.name = name;
         this.hp = hp;
@@ -54,6 +88,14 @@ public abstract class Enemy implements Case, HpInteraction, Fight {
         this.strength = strength;
     }
 
+
+    /**
+     * Méthode d'interaction : ici permet d'afficher le nom de l'ennemi et de lancer un combat.
+     *
+     * @param player personnage instancié pour la partie.
+     * @param board  plateau de jeu instancié pour la partie.
+     * @param game   partie de jeu instanciée.
+     */
     @Override
     public void doThis(Character player, ArrayList board, Game game) {
         System.out.println("I am the " + this.getName() + ".");
@@ -61,6 +103,19 @@ public abstract class Enemy implements Case, HpInteraction, Fight {
 
     }
 
+    /**
+     * Méthode d'interaction liée au combat. Permet d'afficher les statistiques de l'ennemi. De l'attaquer ou de fuir.
+     * En cas d'attaque, l'ennemi attaque à son tour via l'appel de méthode hpInteraction(). Si l'ennemi est encore
+     * vivant, l'utilisateur peut choisir d'attaquer à nouveau ou de fuir. Si l'ennemi meurt, fin du combat, la case
+     * devient une EmptyCase.
+     * <p>
+     * En cas d'attaque, les dégats infligés sont calculés à partir d'un coefficient appliqué à la force du personnage.
+     * En cas de fuite, le personnage recule d'une case sur le plateau, et un nouveau de jeu commence.
+     *
+     * @param player personnage instancié pour la partie.
+     * @param board  plateau instancié pour la partie.
+     * @param game   partie de jeu instanciée.
+     */
     @Override
     public void fight(Character player, ArrayList board, Game game) {
         System.out.println("Enemy's stats :");
@@ -106,6 +161,13 @@ public abstract class Enemy implements Case, HpInteraction, Fight {
 
     }
 
+    /**
+     * Méthode d'interaction en cas d'attaque de l'ennemi. Les dégats reçus sont calculés à partir d'un coefficient
+     * appliqué à la force de l'ennemi puis appliqué à la vie du personnage.
+     * En cas de mort du personnage : message de gameover et fin de la partie.
+     *
+     * @param player personnage instancié pour la partie.
+     */
     @Override
     public void hpInteraction(Character player) {
         int damage = (int) (this.getStrength() * 0.4);
@@ -135,7 +197,6 @@ public abstract class Enemy implements Case, HpInteraction, Fight {
             System.out.println("\\    \\_\\  \\/ __ \\|  Y Y  \\  ___/  (  <_> )   /\\  ___/|  | \\/");
             System.out.println(" \\______  (____  /__|_|  /\\___  >  \\____/ \\_/  \\___  >__|   ");
             System.out.println("        \\/     \\/      \\/     \\/                   \\/       ");
-
 
 
             System.exit(0);

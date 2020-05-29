@@ -1,21 +1,51 @@
 package com.dragonWarriors.characters;
 
+/**
+ * Classe abstraite qui permet l'instanciation d'un personnage.
+ */
 public abstract class Character {
+
+    /**
+     * Nom du personnage
+     */
     private String name;
+
+    /**
+     * Hp du personnage
+     */
     private int hp;
+
+    /**
+     * Strength du personnage
+     */
     private int strength;
 
+    /**
+     * Constructeur simple
+     */
     public Character() {
     }
 
+    /**
+     * Constructeur avec nom
+     *
+     * @param name Nom du personnage
+     */
     public Character(String name) {
         this.name = name;
     }
 
-    public Character(String name, int hp, int attack) {
+    /**
+     * Constructeur complet avec nom hp et strength
+     *
+     * @param name     Nom du personnage
+     * @param hp       Hp du personnage
+     * @param strength Strength du personnage
+     */
+    public Character(String name, int hp, int strength) {
         this.name = name;
         this.hp = hp;
-        this.strength = attack;
+        this.strength = strength;
     }
 
     public String getName() {
@@ -42,13 +72,4 @@ public abstract class Character {
         this.strength = strength;
     }
 
-
-    @Override
-    public String toString() {
-        return "Character{" +
-                "name='" + name + '\'' +
-                ", hp=" + hp +
-                ", attack=" + strength +
-                '}';
-    }
 }
