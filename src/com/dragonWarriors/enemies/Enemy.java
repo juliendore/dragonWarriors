@@ -2,6 +2,7 @@ package com.dragonWarriors.enemies;
 
 import com.dragonWarriors.EmptyCase;
 import com.dragonWarriors.Game;
+import com.dragonWarriors.Menu;
 import com.dragonWarriors.interfaces.Fight;
 import com.dragonWarriors.interfaces.HpInteraction;
 import com.dragonWarriors.interfaces.Case;
@@ -95,6 +96,9 @@ public abstract class Enemy implements Case, HpInteraction, Fight {
                     this.fight(player, board, game);
                 }
                 break;
+            case "quit":
+                Menu.caseQuit();
+                break;
             default:
                 System.out.println("Incorrect entry.");
                 this.fight(player, board, game);
@@ -131,6 +135,9 @@ public abstract class Enemy implements Case, HpInteraction, Fight {
             System.out.println("\\    \\_\\  \\/ __ \\|  Y Y  \\  ___/  (  <_> )   /\\  ___/|  | \\/");
             System.out.println(" \\______  (____  /__|_|  /\\___  >  \\____/ \\_/  \\___  >__|   ");
             System.out.println("        \\/     \\/      \\/     \\/                   \\/       ");
+
+
+
             System.exit(0);
         }
         System.out.println("Your stats :");

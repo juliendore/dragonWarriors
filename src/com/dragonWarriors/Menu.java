@@ -3,8 +3,6 @@ package com.dragonWarriors;
 import com.dragonWarriors.characters.*;
 import com.dragonWarriors.characters.Character;
 
-//import com.dragonWarriors.Game.*;
-
 import java.util.Scanner;
 
 public class Menu {
@@ -26,34 +24,10 @@ public class Menu {
                 "                          / /_/ / /  / /_/ / / /  __/ /__/ /_                                 \n" +
                 "                         / .___/_/   \\______/ /\\___/\\___/\\__/                                 \n" +
                 "                        /_/              /___/                                                ");
-
-//        System.out.println("    .___                                      ");
-//        System.out.println("  __| _/___________     ____   ____   ____    ");
-//        System.out.println(" / __ |\\_  __ \\__  \\   / ___\\ /  _ \\ /    \\   ");
-//        System.out.println("/ /_/ | |  | \\// __ \\_/ /_/  >  <_> )   |  \\  ");
-//        System.out.println("\\____ | |__|  (____  /\\___  / \\____/|___|  /  ");
-//        System.out.println("     \\/            \\//_____/             \\/   ");
-//        System.out.println("                             .__              ");
-//        System.out.println("__  _  _______ ______________|__| ___________ ");
-//        System.out.println("\\ \\/ \\/ /\\__  \\\\_  __ \\_  __ \\  |/  _ \\_  __ \\");
-//        System.out.println(" \\     /  / __ \\|  | \\/|  | \\/  (  <_> )  | \\/");
-//        System.out.println("  \\/\\_/  (____  /__|   |__|  |__|\\____/|__|   ");
-//        System.out.println("              \\/                              ");
-//        System.out.println(" ");
-//        System.out.println(" ");
-//        System.out.println(" ");
-//
-//        System.out.println("   ______                                                                    _                ");
-//        System.out.println("  / ________ _____ ___  ____  __  _______   ____  __  ______ ___  ___  _____(_____ ___  _____ ");
-//        System.out.println(" / /   / __ `/ __ `__ \\/ __ \\/ / / / ___/  / __ \\/ / / / __ `__ \\/ _ \\/ ___/ / __ `/ / / / _ \\");
-//        System.out.println("/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  / / / / /_/ / / / / / /  __/ /  / / /_/ / /_/ /  __/");
-//        System.out.println("\\____/\\__,_/_/ /_/ /_/ .___/\\__,_/____/  /_/ /_/\\__,_/_/ /_/ /_/\\___/_/  /_/\\__, /\\__,_/\\___/ ");
-//        System.out.println("                    /_/                                                       /_/             ");
         System.out.println("An epic journey, a hero's quest");
         System.out.println("    start");
         System.out.println("    quit");
         System.out.println("===============");
-
         String userinput = input.nextLine();
         boolean isOkay = true;
         while (isOkay) {
@@ -83,10 +57,8 @@ public class Menu {
         System.out.println("    warrior");
         System.out.println("    wizard");
         System.out.println("===============");
-
         Scanner input = new Scanner(System.in);
         String userinput = input.nextLine();
-
         switch (userinput) {
             case "warrior":
                 Warrior warrior = new Warrior(name);
@@ -122,7 +94,6 @@ public class Menu {
                 System.out.println("  |  Class : " + player.getClass().getSimpleName());
                 System.out.println("  |  Hp : " + player.getHp());
                 System.out.println("  |  Strength : " + player.getStrength());
-                System.out.println("===============");
                 this.next(player);
                 break;
             case "rename":
@@ -146,12 +117,9 @@ public class Menu {
         }
     }
 
-    public void caseQuit() {
-        System.out.println("===============");
+    public static void caseQuit() {
         System.out.println("See you soon !");
-        System.out.println("===============");
         System.exit(0);
     }
-
 }
 
