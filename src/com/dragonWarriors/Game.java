@@ -80,6 +80,19 @@ public class Game {
         Scanner input = new Scanner(System.in);
         String userinput = input.nextLine();
         switch (userinput) {
+            case "pwd":
+                System.out.println(" Case number " + Integer.sum(this.board.indexOf(this.board.get(this.pos - 1)), 1) + " : " + this.board.get(this.pos - 1).getClass().getSimpleName() + " <<< You're here !");
+                break;
+            case "map":
+                for (Case c : this.board
+                ) {
+                    if (this.pos == Integer.sum(this.board.indexOf(c), 1)) {
+                        System.out.println(" Case number " + Integer.sum(this.board.indexOf(c), 1) + " : " + c.getClass().getSimpleName() + " <<< You're here !");
+                    } else {
+                        System.out.println(" Case number " + Integer.sum(this.board.indexOf(c), 1) + " : " + c.getClass().getSimpleName());
+                    }
+                }
+                break;
             case "debug":
                 System.out.println("===============");
                 System.out.println("debug mode, type wanted position.");
