@@ -66,6 +66,8 @@ public class Game {
      * <p>
      * Gestion du cas où le joueur termine la partie. Une fois sur la case finale il peut choisir de recommencer une
      * partie (reset position 1 et reset des statistiques) ou de quitter.
+     * Possibilite d'acceder a un mode debug pour assigner directement une position specifique au personnage ainsi qu'a
+     * une carte.
      *
      * @param player une instance d'une classe fille de la classe Character. Le personnage de l'utilisateur.
      */
