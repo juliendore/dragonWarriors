@@ -32,13 +32,15 @@ public class Game {
     /**
      * Plateau de jeu. Une ArrayList qui contiendra des implémentations de l'interface Case.
      */
-    private ArrayList<Case> board = new ArrayList();
+    private ArrayList<Case> board;
 
     /**
      * Constructeur : initialise la position à 1, génére un plateau de jeu, puis répartit aléatoirement les éléments du
      * plateau.
      */
     public Game() {
+
+        this.board = new ArrayList();
 
         this.pos = 1;
 
@@ -125,10 +127,13 @@ public class Game {
                 case "restart":
                     this.pos = 1;
                     if (player instanceof Warrior) {
-                        System.out.println("here");
-                        this.play(new Warrior(player.getName()));
+                        player.setHp(5);
+                        player.setStrength(5);
+                        this.play(player);
                     } else if (player instanceof Wizard) {
-                        this.play(new Wizard(player.getName()));
+                        player.setHp(3);
+                        player.setStrength(8);
+                        this.play(player);
                     }
                     break;
                 case "quit":

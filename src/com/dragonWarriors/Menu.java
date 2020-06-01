@@ -77,12 +77,12 @@ public class Menu {
             case "warrior":
                 Warrior warrior = new Warrior(name);
                 warrior.sayHello();
-                next(warrior);
+                newGame(warrior);
                 break;
             case "wizard":
                 Wizard wizard = new Wizard(name);
                 wizard.sayHello();
-                next(wizard);
+                newGame(wizard);
                 break;
             case "quit":
                 this.caseQuit();
@@ -107,7 +107,7 @@ public class Menu {
      *
      * @param player une instance de la classe Warrior ou Wizard (qui hérite de Character), le personnage créé précedemment.
      */
-    public void next(Character player) {
+    private void newGame(Character player) {
         System.out.println("===============");
         System.out.println("What do you want to do now ?");
         System.out.println("    infos");
@@ -122,7 +122,7 @@ public class Menu {
                 System.out.println("  |  Class : " + player.getClass().getSimpleName());
                 System.out.println("  |  Hp : " + player.getHp());
                 System.out.println("  |  Strength : " + player.getStrength());
-                this.next(player);
+                this.newGame(player);
                 break;
             case "rename":
                 System.out.println("What is your new name ?");
@@ -130,7 +130,7 @@ public class Menu {
                 input = new Scanner(System.in);
                 userinput = input.nextLine();
                 player.setName(userinput);
-                this.next(player);
+                this.newGame(player);
                 break;
             case "play":
                 Game game = new Game();
@@ -141,7 +141,7 @@ public class Menu {
                 break;
             default:
                 System.out.println("Incorrect entry.");
-                this.next(player);
+                this.newGame(player);
         }
     }
 
