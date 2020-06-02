@@ -51,6 +51,9 @@ public abstract class Enemy implements Case, HpInteraction, Fight {
         this.name = name;
     }
 
+    //Méthode abstraite
+//    public abstract void toto();
+
     /**
      * Constructeur complet de la classe.
      *
@@ -100,7 +103,6 @@ public abstract class Enemy implements Case, HpInteraction, Fight {
     public void doThis(Character player, ArrayList board, Game game) {
         System.out.println("I am the " + this.getName() + ".");
         fight(player, board, game);
-
     }
 
     /**

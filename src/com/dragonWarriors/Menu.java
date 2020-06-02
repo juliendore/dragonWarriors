@@ -3,6 +3,7 @@ package com.dragonWarriors;
 import com.dragonWarriors.characters.*;
 import com.dragonWarriors.characters.Character;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
@@ -10,6 +11,12 @@ import java.util.Scanner;
  * quitter le programme.
  */
 public class Menu {
+
+    private Connect connect;
+
+    public Menu() {
+        this.connect = new Connect();
+    }
 
     /**
      * Cette méthode permet de demander à l'utilisateur s'il souhaite commencer à jouer, auquel cas il pourra
@@ -70,6 +77,7 @@ public class Menu {
         System.out.println("Choose your character");
         System.out.println("    warrior");
         System.out.println("    wizard");
+        System.out.println("    presets");
         System.out.println("===============");
         Scanner input = new Scanner(System.in);
         String userinput = input.nextLine();
@@ -81,6 +89,25 @@ public class Menu {
             case "wizard":
                 Wizard wizard = new Wizard(name);
                 newGame(wizard);
+                break;
+            case "presets":
+                try {
+                    this.connect.getHeroes();
+                } catch (SQLException eHeroes) {
+                    System.out.println(eHeroes);
+                }
+                this.newCharacter(name);
+                break;
+            case "specific":
+                System.out.println("j'affiche un perso specifique");
+                Scanner specifichero = new Scanner(System.in);
+                String hero = specifichero.nextLine();
+                try {
+                    this.connect.getHero(hero);
+                } catch (SQLException eHero) {
+                    System.out.println(eHero);
+                }
+                this.newCharacter(name);
                 break;
             case "quit":
                 this.caseQuit();
@@ -142,7 +169,6 @@ public class Menu {
                 this.newGame(player);
         }
     }
-
 
     /**
      * Une méthode qui permet de quitter le programme après avoir affiché un message d'au revoir. Méthode statique qui
