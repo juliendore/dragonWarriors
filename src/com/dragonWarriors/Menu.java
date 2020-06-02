@@ -2,12 +2,12 @@ package com.dragonWarriors;
 
 import com.dragonWarriors.characters.*;
 import com.dragonWarriors.characters.Character;
+
 import java.util.Scanner;
 
 /**
  * La classe Menu permet d'afficher le menu d'accueil, d'instancier un nouveau personnage, de lancer une partie et de
  * quitter le programme.
- *
  */
 public class Menu {
 
@@ -76,12 +76,10 @@ public class Menu {
         switch (userinput) {
             case "warrior":
                 Warrior warrior = new Warrior(name);
-                warrior.sayHello();
                 newGame(warrior);
                 break;
             case "wizard":
                 Wizard wizard = new Wizard(name);
-                wizard.sayHello();
                 newGame(wizard);
                 break;
             case "quit":
@@ -97,11 +95,11 @@ public class Menu {
      * Une fois le personnage créé, cette méthode permet à l'utilisateur d'obtenir un récaptitulatif des caractéristiques
      * de son personnage.
      * infos
-     *|  Name : Toto
-     *|  Class : Warrior
-     *|  Hp : 5
-     *|  Strength : 5
-     *
+     * |  Name : Toto
+     * |  Class : Warrior
+     * |  Hp : 5
+     * |  Strength : 5
+     * <p>
      * Eventuellement de changer le nom de son personnage s'il le souhaite. Enfin, l'utilisateur choisir de commencer
      * une nouvelle partie.
      *

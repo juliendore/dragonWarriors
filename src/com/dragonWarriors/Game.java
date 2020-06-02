@@ -74,7 +74,7 @@ public class Game {
      * @param player une instance d'une classe fille de la classe Character. Le personnage de l'utilisateur.
      */
     public void play(Character player) {
-        System.out.println("Current position > " + this.pos + "/64");
+        System.out.println("Currently on case " + Integer.sum(this.board.indexOf(this.board.get(this.pos - 1)), 1) + " : " + this.board.get(this.pos - 1).getClass().getSimpleName());
         System.out.println("Your stats :");
         System.out.println("  |  Hp : " + player.getHp());
         System.out.println("  |  Strength : " + player.getStrength());
@@ -126,6 +126,9 @@ public class Game {
             switch (userinput) {
                 case "restart":
                     this.pos = 1;
+                    this.board.clear();
+                    this.boardSettings(64, 4, 10, 10, 5, 4, 5, 2, 6, 2);
+                    Collections.shuffle(this.board);
                     if (player instanceof Warrior) {
                         player.setHp(5);
                         player.setStrength(5);
