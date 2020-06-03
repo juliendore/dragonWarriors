@@ -14,6 +14,11 @@ public class Wizard extends Character {
         this.sayHello();
     }
 
+    public Wizard(String name, int hp, int strength) {
+        super(name, hp, strength);
+        this.sayHello();
+    }
+
     /**
      * Méthode de présentation du personnage instancié. Indication sur sa classe et son nom.
      */

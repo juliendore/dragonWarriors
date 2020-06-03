@@ -14,6 +14,11 @@ public class Warrior extends Character {
         this.sayHello();
     }
 
+    public Warrior(String name, int hp, int strength) {
+        super(name, hp, strength);
+        this.sayHello();
+    }
+
     /**
      * Méthode de présentation du personnage instancié. Indication sur sa classe et son nom.
      */

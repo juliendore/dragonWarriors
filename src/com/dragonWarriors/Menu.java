@@ -2,8 +2,10 @@ package com.dragonWarriors;
 
 import com.dragonWarriors.characters.*;
 import com.dragonWarriors.characters.Character;
+import org.w3c.dom.ls.LSOutput;
 
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -13,6 +15,8 @@ import java.util.Scanner;
 public class Menu {
 
     private Connect connect;
+
+    private ArrayList<String> presethero;
 
     public Menu() {
         this.connect = new Connect();
@@ -74,23 +78,37 @@ public class Menu {
      */
     private void newCharacter(String name) {
         System.out.println("===============");
-        System.out.println("Choose your character");
+        System.out.println("Create your own character");
         System.out.println("    warrior");
         System.out.println("    wizard");
-        System.out.println("    presets");
+        System.out.println("Or discover our presets heroes");
+        System.out.println("    see 'all'");
+        System.out.println("    'search' by id");
         System.out.println("===============");
         Scanner input = new Scanner(System.in);
         String userinput = input.nextLine();
         switch (userinput) {
             case "warrior":
-                Warrior warrior = new Warrior(name);
+                System.out.println("How many hp you have ?");
+                Scanner hpscannerWa = new Scanner(System.in);
+                int hpWa = hpscannerWa.nextInt();
+                System.out.println("How strong are you ?");
+                Scanner strengthscanner = new Scanner(System.in);
+                int strengthWa = strengthscanner.nextInt();
+                Warrior warrior = new Warrior(name, hpWa, strengthWa);
                 newGame(warrior);
                 break;
             case "wizard":
-                Wizard wizard = new Wizard(name);
+                System.out.println("How many hp you have ?");
+                Scanner hpscannerWi = new Scanner(System.in);
+                int hpWi = hpscannerWi.nextInt();
+                System.out.println("How strong are you ?");
+                Scanner strengthscannerWi = new Scanner(System.in);
+                int strengthWi = strengthscannerWi.nextInt();
+                Wizard wizard = new Wizard(name, hpWi, strengthWi);
                 newGame(wizard);
                 break;
-            case "presets":
+            case "all":
                 try {
                     this.connect.getHeroes();
                 } catch (SQLException eHeroes) {
@@ -98,16 +116,72 @@ public class Menu {
                 }
                 this.newCharacter(name);
                 break;
-            case "specific":
-                System.out.println("j'affiche un perso specifique");
+            case "search":
+                System.out.println("What is the id of the hero you want to see ?");
                 Scanner specifichero = new Scanner(System.in);
-                String hero = specifichero.nextLine();
+                int id = specifichero.nextInt();
                 try {
-                    this.connect.getHero(hero);
+                    this.presethero = this.connect.getHero(id);
+                    System.out.println("  |  Name : " + this.presethero.get(2));
+                    System.out.println("  |  Class : " + this.presethero.get(1));
+                    System.out.println("  |  Hp : " + this.presethero.get(3));
+                    System.out.println("  |  Strength : " + this.presethero.get(4));
                 } catch (SQLException eHero) {
                     System.out.println(eHero);
                 }
-                this.newCharacter(name);
+                System.out.println("What do you want to do with this hero");
+                System.out.println("    play");
+                System.out.println("    rename");
+                System.out.println("    delete");
+                Scanner startthisheroScanner = new Scanner(System.in);
+                String startthisheroString = startthisheroScanner.nextLine();
+                switch (startthisheroString) {
+                    case "play":
+                        System.out.println(this.presethero.get(0));
+                        if (this.presethero.get(1).equals("Warrior")) {
+                            Warrior preset = new Warrior(this.presethero.get(2), Integer.parseInt(this.presethero.get(3)), Integer.parseInt(this.presethero.get(4)));
+                            newGame(preset);
+                        }
+                        if (this.presethero.get(1).equals("Wizard")) {
+                            Wizard preset = new Wizard(this.presethero.get(2), Integer.parseInt(this.presethero.get(3)), Integer.parseInt(this.presethero.get(4)));
+                            newGame(preset);
+                        }
+                        break;
+                    case "rename":
+                        Scanner newnamescanner = new Scanner(System.in);
+                        String newname = newnamescanner.nextLine();
+                        try {
+                            this.connect.updateHero(Integer.parseInt(this.presethero.get(0)), newname);
+                            System.out.println("Hero's new name is now " + newname + ".");
+                        } catch (SQLException eRename) {
+                            System.out.println(eRename);
+                        }
+                        this.newCharacter(name);
+                        break;
+                    case "delete":
+                        System.out.println("Are you sure you want to delete " + this.presethero.get(2) + " ?");
+                        Scanner confirmscanner = new Scanner(System.in);
+                        String confirm = confirmscanner.nextLine();
+                        switch (confirm) {
+                            case "yes":
+                                try {
+                                    this.connect.deleteHero(Integer.parseInt(this.presethero.get(0)));
+                                    System.out.println("You have deleted " + this.presethero.get(2) + ".");
+                                } catch (SQLException eDelete) {
+                                    System.out.println(eDelete);
+                                }
+                                this.newCharacter(name);
+                                break;
+                            case "no":
+                                this.newCharacter(name);
+                                break;
+                        }
+                        break;
+                    case "default":
+                        System.out.println("Incorrect entry");
+                        this.newCharacter(name);
+                        break;
+                }
                 break;
             case "quit":
                 this.caseQuit();
@@ -138,6 +212,7 @@ public class Menu {
         System.out.println("    infos");
         System.out.println("    rename");
         System.out.println("    play");
+        System.out.println("    'add' your character to preset");
         System.out.println("===============");
         Scanner input = new Scanner(System.in);
         String userinput = input.nextLine();
@@ -160,6 +235,14 @@ public class Menu {
             case "play":
                 Game game = new Game();
                 game.play(player);
+                break;
+            case "add":
+                try {
+                    this.connect.createHero(player.getName(), player.getClass().getSimpleName(), player.getHp(), player.getStrength());
+                } catch (SQLException eAdd) {
+                    System.out.println(eAdd);
+                }
+                this.newGame(player);
                 break;
             case "quit":
                 this.caseQuit();
