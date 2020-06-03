@@ -2,7 +2,6 @@ package com.dragonWarriors;
 
 import com.dragonWarriors.characters.*;
 import com.dragonWarriors.characters.Character;
-import org.w3c.dom.ls.LSOutput;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -120,15 +119,11 @@ public class Menu {
                 System.out.println("What is the id of the hero you want to see ?");
                 Scanner specifichero = new Scanner(System.in);
                 int id = specifichero.nextInt();
-                try {
-                    this.presethero = this.connect.getHero(id);
-                    System.out.println("  |  Name : " + this.presethero.get(2));
-                    System.out.println("  |  Class : " + this.presethero.get(1));
-                    System.out.println("  |  Hp : " + this.presethero.get(3));
-                    System.out.println("  |  Strength : " + this.presethero.get(4));
-                } catch (SQLException eHero) {
-                    System.out.println(eHero);
-                }
+                this.presethero = this.connect.getHero(id);
+                System.out.println("  |  Name : " + this.presethero.get(2));
+                System.out.println("  |  Class : " + this.presethero.get(1));
+                System.out.println("  |  Hp : " + this.presethero.get(3));
+                System.out.println("  |  Strength : " + this.presethero.get(4));
                 System.out.println("What do you want to do with this hero");
                 System.out.println("    play");
                 System.out.println("    rename");
@@ -261,5 +256,6 @@ public class Menu {
         System.out.println("See you soon !");
         System.exit(0);
     }
+
 }
 
