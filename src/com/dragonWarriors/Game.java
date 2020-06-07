@@ -82,7 +82,7 @@ public class Game {
         System.out.println("'roll' to roll the dice.");
         System.out.println("===============");
         Scanner input = new Scanner(System.in);
-        String userinput = input.nextLine();
+        String userinput = input.nextLine().trim().toLowerCase();
         switch (userinput) {
             case "pwd":
                 System.out.println(" Case number " + Integer.sum(this.board.indexOf(this.board.get(this.pos - 1)), 1) + " : " + this.board.get(this.pos - 1).getClass().getSimpleName() + " <<< You're here !");
@@ -122,7 +122,7 @@ public class Game {
             System.out.println("restart");
             System.out.println("quit");
             input = new Scanner(System.in);
-            userinput = input.nextLine();
+            userinput = input.nextLine().trim().toLowerCase();
             switch (userinput) {
                 case "restart":
                     this.pos = 1;

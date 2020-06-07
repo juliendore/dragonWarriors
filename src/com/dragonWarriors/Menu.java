@@ -46,7 +46,7 @@ public class Menu {
         System.out.println("    start");
         System.out.println("    quit");
         System.out.println("===============");
-        String userinput = input.nextLine();
+        String userinput = input.nextLine().trim().toLowerCase();
         boolean isOkay = true;
         while (isOkay) {
             switch (userinput) {
@@ -85,7 +85,7 @@ public class Menu {
         System.out.println("    'search' by id");
         System.out.println("===============");
         Scanner input = new Scanner(System.in);
-        String userinput = input.nextLine();
+        String userinput = input.nextLine().trim().toLowerCase();
         switch (userinput) {
             case "warrior":
                 System.out.println("How many hp you have ?");
@@ -129,7 +129,7 @@ public class Menu {
                 System.out.println("    rename");
                 System.out.println("    delete");
                 Scanner startthisheroScanner = new Scanner(System.in);
-                String startthisheroString = startthisheroScanner.nextLine();
+                String startthisheroString = startthisheroScanner.nextLine().trim().toLowerCase();
                 switch (startthisheroString) {
                     case "play":
                         System.out.println(this.presethero.get(0));
@@ -156,7 +156,7 @@ public class Menu {
                     case "delete":
                         System.out.println("Are you sure you want to delete " + this.presethero.get(2) + " ?");
                         Scanner confirmscanner = new Scanner(System.in);
-                        String confirm = confirmscanner.nextLine();
+                        String confirm = confirmscanner.nextLine().trim().toLowerCase();
                         switch (confirm) {
                             case "yes":
                                 try {
@@ -210,7 +210,7 @@ public class Menu {
         System.out.println("    'add' your character to preset");
         System.out.println("===============");
         Scanner input = new Scanner(System.in);
-        String userinput = input.nextLine();
+        String userinput = input.nextLine().trim().toLowerCase();
         switch (userinput) {
             case "infos":
                 System.out.println("  |  Name : " + player.getName());
